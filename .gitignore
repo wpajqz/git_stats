@@ -1,0 +1,5 @@
+# debug
+/debug
+/.env
+# editor workspace
+/.vscode

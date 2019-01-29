@@ -1,0 +1,12 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "project stats for all project from links123.com",
+        "title": "project stats for all project from links123.com",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8080/v1",
+    "paths": {}
+}
