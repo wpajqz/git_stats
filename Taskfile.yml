@@ -11,4 +11,4 @@ tasks:
       - ./*.go
   build:
     cmds:
-      - go build main.go
+      - go build -i
