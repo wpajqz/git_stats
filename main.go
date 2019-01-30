@@ -42,6 +42,8 @@ func main() {
 
 // start start the http server
 func start(host, port string) {
+	//go RunGitStats()
+
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.Dir(c.StatsDir)))
 

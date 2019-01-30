@@ -16,6 +16,7 @@ type config struct {
 	Debug      bool   `mapstructure:"debug" validate:"required"`
 	GiteaToken string `mapstructure:"gitea_token" validate:"required"`
 	StatsDir   string `mapstructure:"dir" validate:"required"`
+	GitDir     string `mapstructure:"git_dir" validate:"required"`
 }
 
 func init() {
@@ -26,6 +27,7 @@ func init() {
 	viper.SetDefault("debug", true)
 	viper.SetDefault("gitea_token", "token")
 	viper.SetDefault("dir", "/stats")
+	viper.SetDefault("git_dir", "/git")
 
 	// bind env
 	viper.SetEnvPrefix("stats")
