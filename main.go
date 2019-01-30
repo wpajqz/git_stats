@@ -42,10 +42,13 @@ func main() {
 
 // start start the http server
 func start(host, port string) {
-	//go RunGitStats()
+	go RunGitStats()
 
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.Dir(c.StatsDir)))
+	mux.HandleFunc("/trigger", func(w http.ResponseWriter, r *http.Request) {
+		go RunGitStats()
+	})
 
 	logrus.Infof("start http server on %s:%s", host, port)
 	err := manners.ListenAndServe(strings.Join([]string{host, port}, ":"), mux)
