@@ -1,5 +1,6 @@
 # debug
 /debug
 /.env
+/stats
 # editor workspace
 /.vscode

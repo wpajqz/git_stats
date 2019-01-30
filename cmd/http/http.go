@@ -1,12 +1,14 @@
 package http
 
 import (
+	"net/http"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 
-	"git.links123.net/links123.com/stats/cmd/http/router"
+	"git.links123.net/links123.com/stats/config"
+
 	"github.com/braintree/manners"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -34,12 +36,13 @@ func RunCommand() *cobra.Command {
 	return cmd
 }
 
-// Start use for cobra or testing
+// Start start the http server
 func Start(host, port string) {
-	// build router
-	r := router.BuildRouter()
-	// start server
-	err := manners.ListenAndServe(strings.Join([]string{host, port}, ":"), r)
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir(config.C.StatsDir)))
+
+	logrus.Infof("start http server on %s:%s", host, port)
+	err := manners.ListenAndServe(strings.Join([]string{host, port}, ":"), mux)
 	if err != nil {
 		panic(err)
 	}

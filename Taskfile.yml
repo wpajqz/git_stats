@@ -1,0 +1,14 @@
+version: '2'
+
+tasks:
+  default:
+    cmds:
+      - task: run
+  run:
+    cmds:
+      - go run main.go http
+    sources:
+      - ./*.go
+  build:
+    cmds:
+      - go build main.go
