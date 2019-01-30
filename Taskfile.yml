@@ -6,7 +6,7 @@ tasks:
       - task: run
   run:
     cmds:
-      - go run main.go http
+      - go run git.links123.net/links123.com/stats
     sources:
       - ./*.go
   build:

@@ -1,4 +1,4 @@
-package config
+package main
 
 import (
 	"log"
@@ -10,12 +10,9 @@ import (
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
-// global config
-var (
-	C appConfig
-)
+var c config
 
-type appConfig struct {
+type config struct {
 	Debug      bool   `mapstructure:"debug" validate:"required"`
 	GiteaToken string `mapstructure:"gitea_token" validate:"required"`
 	StatsDir   string `mapstructure:"dir" validate:"required"`
@@ -36,19 +33,19 @@ func init() {
 	viper.AutomaticEnv()
 
 	// unmarshal config to struct
-	if err := viper.Unmarshal(&C); err != nil {
+	if err := viper.Unmarshal(&c); err != nil {
 		log.Fatalf("viper.Unmarshal error: %v\n", err)
 	}
 
 	// validate data type
 	validate := validator.New()
-	err := validate.Struct(&C)
+	err := validate.Struct(&c)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
 	// set logrus debug mode
-	if C.Debug {
+	if c.Debug {
 		logrus.SetLevel(logrus.DebugLevel)
 	}
 }
